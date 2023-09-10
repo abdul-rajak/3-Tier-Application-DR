@@ -37,6 +37,11 @@ maven_url = "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-
 #   mode '0644'
 #   action :create
 # end
+maven_home = '/opt/maven'
+maven_bin = "#{maven_home}/bin"
+maven_cmd = 'mvn'
+
+
 execute 'download_maven' do
   command "wget #{maven_url} -O /tmp/apache-maven.tar.gz"
   user 'root'
@@ -47,9 +52,6 @@ end
 
 
 # Define environment variables for Maven
-maven_home = '/opt/maven'
-maven_bin = "#{maven_home}/bin"
-maven_cmd = 'mvn'
 
 # Extract Maven and set environment variables
 execute 'extract_maven' do
