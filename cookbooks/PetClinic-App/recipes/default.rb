@@ -23,6 +23,8 @@ directory '/opt/maven' do
   action :create
 end
 
+maven_extract_dir = "/opt/apache-maven"
+
 # Define the Maven version and URL
 #maven_version = '3.8.4'
 maven_url = "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz"
@@ -39,7 +41,7 @@ execute 'download_maven' do
   command "wget #{maven_url} -O /tmp/apache-maven.tar.gz"
   user 'root'
   group 'root'
-  not_if { ::File.exist?("#{maven_extract_dir}/bin/mvn") } # Only download if Maven is not already installed
+  not_if { ::File.exist?("#{maven_bin}/#{maven_cmd}") }
 end
 
 
