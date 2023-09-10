@@ -114,9 +114,9 @@ ruby_block 'update_postgresql_config' do
       #url = 'jdbc:postgresql://#{node['petclinic-testing']['DB_host']}:5432/petclinic'
       #username=node['petclinic-testing']['DB_user']
       #password=node['petclinic-testing']['DB_password']
-      url = "jdbc:postgresql://#{node['petclinic-testing']['DB_host']}:5432/petclinic"
-      username = node['petclinic-testing']['DB_user']
-      password = node['petclinic-testing']['DB_password']
+      url = "jdbc:postgresql://#{node['PetClinic-App']['DB_host']}:5432/petclinic"
+      username = node['PetClinic-App']['DB_user']
+      password = node['PetClinic-App']['DB_password']
       # Define the new lines with variables
       new_lines = <<-EOL
   spring.sql.init.schema-locations=classpath*:db/postgresql/initDB.sql

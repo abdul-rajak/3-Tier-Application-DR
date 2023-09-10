@@ -62,7 +62,7 @@ git target_directory do
 end
 # Define the path to your configuration file
 config_file = '/home/ubuntu/spring-petclinic-angular/src/environments/environment.ts'
-host = node['petclinic-web-testing']['App_host']
+host = node['PetClinic-Web']['App_host']
 
 # Specify the updated REST_API_URL with the desired URL
 new_api_url = "'http://#{host}:9966/petclinic/api/'"
