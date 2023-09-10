@@ -1,5 +1,5 @@
 # Install Java 17 using the 'java' cookbook
-jdk_package = 'openjdk-17-jdk'
+jdk_package = 'openjdk-17-jre-headless'
 
 # Use the package resource to install OpenJDK 17
 package jdk_package do
