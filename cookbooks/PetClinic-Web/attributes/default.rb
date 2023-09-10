@@ -1,1 +1,1 @@
-default["PetClinic-Web"]["App_host"] = "54.234.155.32"
+default["PetClinic-Web"]["App_host"] = "3.85.54.87"
