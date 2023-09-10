@@ -27,14 +27,22 @@ end
 #maven_version = '3.8.4'
 maven_url = "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz"
 
-# Download and extract Maven
-remote_file '/tmp/apache-maven.tar.gz' do
-  source maven_url
-  owner 'root'
+# # Download and extract Maven
+# remote_file '/tmp/apache-maven.tar.gz' do
+#   source maven_url
+#   owner 'root'
+#   group 'root'
+#   mode '0644'
+#   action :create
+# end
+execute 'download_maven' do
+  command "wget #{maven_url} -O /tmp/apache-maven.tar.gz"
+  user 'root'
   group 'root'
-  mode '0644'
-  action :create
+  not_if { ::File.exist?("#{maven_extract_dir}/bin/mvn") } # Only download if Maven is not already installed
 end
+
+
 
 # Define environment variables for Maven
 maven_home = '/opt/maven'
