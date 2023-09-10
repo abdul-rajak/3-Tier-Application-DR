@@ -33,7 +33,7 @@ end
 service 'nginx' do
   action [:enable, :start]
 end
-target_directory = '/home/ubuntu'
+target_directory = '/home/ubuntu/spring-petclinic-angular'
 
 # Define the Git repository URL
 repository_url = 'https://github.com/spring-petclinic/spring-petclinic-angular.git'
@@ -47,17 +47,22 @@ directory target_directory do
 end
 
 # Clone the Git repository as the root user
-execute 'clone_repository' do
-  command "cd  #{target_directory} && git clone #{repository_url}"
-  user 'root'
-  group 'root'
-  umask '022'  # Adjust the umask as needed
-  action :run
-end
+#execute 'clone_repository' do
+  #command "cd  #{target_directory} && git clone #{repository_url}"
+  #user 'root'
+  #group 'root'
+  #umask '022'  # Adjust the umask as needed
+ # action :run
+#end
 
+git target_directory do
+  repository repository_url
+  revision 'master'
+  action :sync
+end
 # Define the path to your configuration file
 config_file = '/home/ubuntu/spring-petclinic-angular/src/environments/environment.ts'
-host = '23.12.23.3'
+host = node['petclinic-web-testing']['App_host']
 
 # Specify the updated REST_API_URL with the desired URL
 new_api_url = "'http://#{host}:9966/petclinic/api/'"
@@ -128,8 +133,3 @@ end
 service 'nginx' do
   action :reload
 end
-#
-# Cookbook:: PetClinic-Web
-# Recipe:: default
-#
-# Copyright:: 2023, The Authors, All Rights Reserved.

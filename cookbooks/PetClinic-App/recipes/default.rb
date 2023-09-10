@@ -24,8 +24,12 @@ directory '/opt/maven' do
 end
 
 # Define the Maven version and URL
-remote_file '/tmp/apache-maven-3.9.4-bin.tar.gz' do
-  source 'https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz'
+#maven_version = '3.8.4'
+maven_url = "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz"
+
+# Download and extract Maven
+remote_file '/tmp/apache-maven.tar.gz' do
+  source maven_url
   owner 'root'
   group 'root'
   mode '0644'
@@ -63,7 +67,7 @@ end
 
 
  #Define the target directory where you want to clone the repository
-target_directory = '/home/ubuntu'
+target_directory = '/home/ubuntu/spring-petclinic-rest'
 
 # Define the Git repository URL
 repository_url = 'https://github.com/spring-petclinic/spring-petclinic-rest.git'
@@ -77,15 +81,23 @@ directory target_directory do
 end
 
 # Clone the Git repository as the root user
-execute 'clone_repository' do
-  command "cd  #{target_directory} && git clone #{repository_url}"
-  user 'root'
-  group 'root'
-  umask '022'  # Adjust the umask as needed
-  action :run
+#execute 'clone_repository' do
+  #command "cd  #{target_directory} && git clone #{repository_url}"
+  #user 'root'
+  #group 'root'
+  #umask '022'  # Adjust the umask as needed
+ # action :run
+#end
+
+git target_directory do
+
+  repository repository_url
+
+  revision 'master'
+
+  action :sync
+
 end
-
-
 
 
 log 'repo_clone_complete' do
@@ -99,9 +111,12 @@ end
 ruby_block 'update_postgresql_config' do
     block do
       # Create the JDBC URL by replacing the host placeholder
-      url = 'jdbc:postgresql://44.201.180.193:5432/petclinic'
-      username='databse_user'
-      password='password'
+      #url = 'jdbc:postgresql://#{node['petclinic-testing']['DB_host']}:5432/petclinic'
+      #username=node['petclinic-testing']['DB_user']
+      #password=node['petclinic-testing']['DB_password']
+      url = "jdbc:postgresql://#{node['petclinic-testing']['DB_host']}:5432/petclinic"
+      username = node['petclinic-testing']['DB_user']
+      password = node['petclinic-testing']['DB_password']
       # Define the new lines with variables
       new_lines = <<-EOL
   spring.sql.init.schema-locations=classpath*:db/postgresql/initDB.sql
@@ -217,8 +232,3 @@ end
 service 'petclinic' do
   action [:enable, :start]
 end
-#
-# Cookbook:: PetClinic-App
-# Recipe:: default
-#
-# Copyright:: 2023, The Authors, All Rights Reserved.
