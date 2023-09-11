@@ -194,9 +194,11 @@ log 'configuration_complete' do
 end
 
 
-
-
-
+execute 'remove_directory' do
+  command 'rm -rf /home/ubuntu/spring-petclinic-rest/target'
+  user 'root'
+  action :run
+end
 
 # Define the command to run
 mvn_command = 'mvn clean install -DskipTests=true'
@@ -243,4 +245,10 @@ end
 # Enable and start the systemd service
 service 'petclinic' do
   action [:enable, :start]
+end
+
+
+# Restart the petclinic service
+service 'petclinic' do
+  action :restart
 end
