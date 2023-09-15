@@ -29,7 +29,7 @@ Before implementing disaster recovery for your 3-Tier application, make sure you
 - Familiarity with AWS services such as EC2, RDS, VPC, AWS Backup & Restore, Lambda, AWS SNS, AWS Eventbridge etc.
 ## Architecture
 
-![My Image](https://aws-dr-data.s3.us-east-1.amazonaws.com/DR-Chef-POC-Scenario.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHUaCmFwLXNvdXRoLTEiRjBEAiBcrTA2mzyV8RXenFgx9bAY2EhN8tbQRnsgmwPJbIkDBwIgLQ9aPKkvckLNylinnwQjyoEbD0Rf6fCTSJupWxm2XSAqsAIIXhADGgw2NTc5MDc3NDc1NDUiDAGZXLyNpfqlQj5OmiqNAkQsfBbWv4B9HRFvJa1rY%2FBu4nTdcZ%2Bqga4KuaoSLOJOdKjriVs8sspnBFvA6GbS8C8SFZ5suGVuIXA%2BMvDy%2BzxmyiY91x2ks1I4P7Ze1D%2BB5qzwnu1v38ISCPmhwjJlEyEtwjrx3pP9v0jytm40vU6KLax1kjsKqSXe9tQeee6DKJIRu8rBg6txlqo4cLFbvPlXL2Quxe6Jrmn6I1aV0kErXyrv%2B5fTLlikqYyBDUyb%2B1iHBajtfM6A6lPuFslXps8BM7DVCU0K5m%2Br6LYK3gQ4dzHcsZDNcQYqIomEl39pIsf%2FL7FLMyTfuRUIY5eihyeUyK9zncvwvVgM0c00JnPrp%2BxuPmZ3B6FJsYTSMLKykKgGOuABaC16Op7vjh6O7vtfTJSWn48UW3He6mHLg83eT0lNUUUUIy9Pm%2F2Tyzv481eRlD3F8oC0Cj0bK7d6l1cKb%2B0K1LmC5RQsnpoVbtZDdnXAOB2eUjuD0tjkDcGDaD1zBsWnu7KbgNEAlmjYPzfDJln2uondEgt9%2BKDf8yVv1n2grsqD5GX6SDN7wTx89ceSdCO1keWGXnsZ2%2BFHQM3UejW3EwcRhAwJ9y4WyYP%2BUG5hkYL5HEE1CjtiW1vmMyi8IkDwBwCH8e6v5LEp%2FDmReeFvR%2FufXMKXfXjuMGMT2Zn7cbM%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230915T132913Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAZSLS3RLM2PTRGSFY%2F20230915%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=608b73b7ef65d8d718eb51c8d222a9b3c6127eb35cb2a3b6325f00a30a2c6347)
+![My Image](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/DR-Chef-POC-Scenario.png)
 
 ## Version Control
 1. Ensure that the primary Chef server is under version control using Git.
