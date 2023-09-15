@@ -53,17 +53,16 @@ Step Function - Restoration :
 Verification :
 + After restoration, access the DR workstation to verify:
 + Node list.
-+ Organizational details.
-+ Cookbooks and recipes.
-Client-Side Changes :
-+ Access clients and execute Chef-client to apply changes from the updated Chef server.
++ Organization details.
++ Runlist setup for all nodes in the recovery stack.
++ Route 53 record sets for traffic rerouting.
++ **Chef Client**: Automatically reapplies changes from the updated Chef server on the nodes.
   
 ## Core Services and Components
 - **Step Function**: Orchestrates the recovery process by invoking Lambda functions in a specific order.
 - **Configuration of Application Stack Dependencies**: Maintained separately in an organization.
 - Cookbooks and recipes.
 - Attribute changes for the DR environment.
-- Runlist setup for all nodes in the recovery stack.
 - Route 53 record sets for traffic rerouting.
 - **Chef Client**: Automatically reapplies changes from the updated Chef server on the nodes.
 
