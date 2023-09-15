@@ -1,4 +1,4 @@
-WS Disater Recovery of 3-Tier Application
+## AWS Disater Recovery of 3-Tier Application
 
 **DR-Application Overview**
 
@@ -60,25 +60,19 @@ Client-Side Changes :
 ## Core Services and Components
 - **Step Function**: Orchestrates the recovery process by invoking Lambda functions in a specific order.
 - **Configuration of Application Stack Dependencies**: Maintained separately in an organization.
-  - Cookbooks and recipes.
-    - Attribute changes for the DR environment.
-      - Runlist setup for all nodes in the recovery stack.
-        - Route 53 record sets for traffic rerouting.
-	- **Chef Client**: Automatically reapplies changes from the updated Chef server on the nodes.
+- Cookbooks and recipes.
+- Attribute changes for the DR environment.
+- Runlist setup for all nodes in the recovery stack.
+- Route 53 record sets for traffic rerouting.
+- **Chef Client**: Automatically reapplies changes from the updated Chef server on the nodes.
 
-	## Testing
-	+ Access the 3-tier application at the DR (Disaster Recovery) site and verify whether our application is operational following the restoration process.
-	+ Verify whether a new entry has been added to our PostgreSQL database.
-	## Contributing
-
-
-
-	Contributions are welcome! Report issues, suggest features, or submit code changes via pull requests. Please follow our code style, add tests, and update documentation. Respect our Code of Conduct, and contributions are licensed under our project's terms. 
+## Testing
++ Access the 3-tier application at the DR (Disaster Recovery) site and verify whether our application is operational following the restoration process.
++ Verify whether a new entry has been added to our PostgreSQL database.
+## Contributing
+Contributions are welcome! Report issues, suggest features, or submit code changes via pull requests. Please follow our code style, add tests, and update documentation. Respect our Code of Conduct, and contributions are licensed under our project's terms. 
 	Thank you for your interest!
-
-
-	## License
-
-	[MIT](https://choosealicense.com/licenses/mit/)
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
 
 
