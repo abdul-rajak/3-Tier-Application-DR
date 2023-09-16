@@ -29,7 +29,9 @@ Before implementing disaster recovery for your 3-Tier application, make sure you
 - Familiarity with AWS services such as EC2, RDS, VPC, AWS Backup & Restore, Lambda, AWS SNS, AWS Eventbridge etc.
 ## Architecture
 
-![My Image](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/DR-Chef-POC-Scenario.png)
+#![My Image](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/DR-Chef-POC-Scenario.png)
+![alt text](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/AWS-DR-Architecture.jpg?raw=true)
+
 
 ## Version Control
 1. Ensure that the primary Chef server is under version control using Git.
