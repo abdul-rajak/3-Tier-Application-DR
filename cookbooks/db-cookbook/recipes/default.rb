@@ -37,6 +37,15 @@ execute 'create_postgres_user' do
   only_if { postgresql_installed }
 end
 
+# Alter the role to allow login
+execute 'alter_postgres_user_login' do
+  command "sudo -u postgres psql -c \"ALTER ROLE #{db_user} WITH LOGIN;\""
+  sensitive false
+  not_if "sudo -u postgres psql -tAc \"SELECT rolcanlogin FROM pg_roles WHERE rolname='#{db_user}';\" | grep -q t"
+  action :run
+  only_if { postgresql_installed }
+end
+
 
 # Step 5: Modify postgresql.conf
 execute 'update_postgresql_conf' do
