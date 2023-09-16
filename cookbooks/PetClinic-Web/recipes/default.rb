@@ -1,5 +1,7 @@
 # Get DB config parameters from databag
 appconfigdata = data_bag_item('configbag','appconfig_items')
+# Get WEB config parameters from databag
+webconfigdata = data_bag_item('configbag','webconfig_items')
 
 # Use the execute resource to download and run the Node.js setup script as root
 execute 'download_and_run_nodesource_setup' do
@@ -121,7 +123,12 @@ end
 
 
 # recipes/configure_nginx.rb
+template '/etc/nginx/sites-enabled/petclinic' do
+  source 'petclinic.erb'
+  variables( WEB_dns: webconfigdata['WEB_dns'])
+end
 
+=begin
 # Define the path to your Nginx configuration file
 nginx_config_file = '/etc/nginx/sites-enabled/petclinic'
 
@@ -146,6 +153,7 @@ file nginx_config_file do
   mode '0644'  # Adjust permissions as needed
   action :create
 end
+=end
 
 # Use the service resource to reload Nginx
 service 'nginx' do
