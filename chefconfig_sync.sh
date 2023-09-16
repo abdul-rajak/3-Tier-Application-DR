@@ -1,3 +1,4 @@
+#!/bin/bash
 # Define the local repository path
 repo_path="/home/ubuntu/Dr-Chef-Git-Repo"
 # Change to the local repository directory
