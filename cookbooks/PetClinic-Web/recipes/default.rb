@@ -15,6 +15,14 @@ package 'nodejs' do
   not_if 'dpkg -l | grep -E "^ii\s+nodejs\b"'  # Check if "nodejs" package is installed
 end
 
+
+# Use the execute resource to update npm to the latest version
+execute 'update_npm' do
+  command 'npm install -g npm@latest'
+  user 'root'
+  action :run
+end
+
 #install angular
 #angular_cli
 
@@ -121,7 +129,7 @@ nginx_config_file = '/etc/nginx/sites-enabled/petclinic'
 nginx_config_content = <<-CONFIG
 server {
     listen 80;
-    server_name web1.synectiks.net;  # Your custom IP or domain
+    server_name dr-web1.synectiks.net;  # Your custom IP or domain
 
     root /home/ubuntu/spring-petclinic-angular/dist;
     index index.html;
