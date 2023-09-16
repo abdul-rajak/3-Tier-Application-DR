@@ -1,13 +1,11 @@
 # Install Java 17 using the 'java' cookbook
 jdk_package = 'openjdk-17-jre-headless'
 
-# Get DB config parameters from databag
-dbconfigdata = data_bag_item('configbag','dbconfig_items')
-
 # Use the package resource to install OpenJDK 17
 package jdk_package do
   action :install
 end
+
 
 
 log 'java_installation_complete' do
@@ -122,15 +120,6 @@ end
 
 # Configurations of applications
 
-template '/home/ubuntu/spring-petclinic-rest/src/main/resources/application-postgresql.properties' do
-  source 'appconfigfile.erb'
-  variables( DB_host: dbconfigdata['DB_host'],
-            DB_user: dbconfigdata['DB_user'], 
-            DB_password: dbconfigdata['DB_password'] )
-end
-
-=begin
-old code - this is working commented this to accomodate templates
 ruby_block 'update_postgresql_config' do
     block do
       # Create the JDBC URL by replacing the host placeholder
@@ -171,14 +160,7 @@ ruby_block 'update_postgresql_config' do
     end
     action :run
   end
-=end
 
-template '/home/ubuntu/spring-petclinic-rest/src/main/resources/application.properties' do
-  source 'application_properties.erb'
-  variables( DB_database: dbconfigdata['DB_database'])
-end
-
-=begin
   # Define recipe to change application.properties
   ruby_block 'update_application_properties' do
     block do
@@ -200,7 +182,7 @@ end
     end
     action :run
   end
-=end
+
 
 
 

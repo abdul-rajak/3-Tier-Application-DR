@@ -1,3 +1,6 @@
+# Get DB config parameters from databag
+appconfigdata = data_bag_item('configbag','appconfig_items')
+
 # Use the execute resource to download and run the Node.js setup script as root
 execute 'download_and_run_nodesource_setup' do
   command 'curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -'
@@ -69,6 +72,12 @@ git target_directory do
   action :sync
 end
 # Define the path to your configuration file
+template '/home/ubuntu/spring-petclinic-angular/src/environments/environment.ts' do
+  source 'environment.ts.erb'
+  variables( APP_host: appconfigdata['APP_host'])
+end
+
+=begin
 config_file = '/home/ubuntu/spring-petclinic-angular/src/environments/environment.ts'
 host = node['PetClinic-Web']['App_host']
 
@@ -88,6 +97,7 @@ ruby_block 'update_environment_config' do
   end
   action :run
 end
+=end
 
 # recipes/build_angular_app.rb
 
