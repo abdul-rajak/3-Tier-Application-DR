@@ -9,7 +9,7 @@ if [ ! -e "$runlist_check" ] ; then
     # pull changes from the remote master branch
     git pull origin main
     # upload the cookbook
-    knife cookbook upload --all
+    knife cookbook upload --cookbook-path /home/ubuntu/Dr-Chef-Git-Repo/cookbooks/ --all
     # create data bag
     knife data bag create configbag
     # import data bags
@@ -29,7 +29,7 @@ else
     # pull changes from the remote master branch
     git pull origin main
     # upload the cookbook
-    knife cookbook upload --all
+    knife cookbook upload --cookbook-path /home/ubuntu/Dr-Chef-Git-Repo/cookbooks/ --all
     # create data bag
     knife data bag create configbag
     # import data bags
