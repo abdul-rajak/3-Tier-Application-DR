@@ -1,6 +1,10 @@
 # Step 1: Check if PostgreSQL is already installed
 postgresql_installed = system('pg_config --version')
 
+apt_update 'update' do
+  action :update
+end
+
 # Step 2: Install PostgreSQL if not installed
 package 'postgresql' do
   action :install
@@ -11,6 +15,9 @@ package 'postgresql-contrib' do
   action :install
   not_if { postgresql_installed }
 end
+
+# Step 1: Check if PostgreSQL got installed 
+postgresql_installed = system('pg_config --version')
 
 # Step 3: Fetch PostgreSQL version
 ruby_block 'fetch_postgresql_version' do

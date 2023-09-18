@@ -1,7 +1,11 @@
 # Get DB config parameters from databag
-appconfigdata = data_bag_item('configbag','appconfig_items')
+appconfigdata = data_bag_item(node['petclinic']['config_data_bag'],'appconfig_items')
 # Get WEB config parameters from databag
-webconfigdata = data_bag_item('configbag','webconfig_items')
+webconfigdata = data_bag_item(node['petclinic']['config_data_bag'],'webconfig_items')
+
+apt_update 'update' do
+  action :update
+end
 
 # Use the execute resource to download and run the Node.js setup script as root
 execute 'download_and_run_nodesource_setup' do

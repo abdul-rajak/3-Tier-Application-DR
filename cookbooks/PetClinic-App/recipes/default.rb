@@ -1,8 +1,12 @@
 # Install Java 17 using the 'java' cookbook
 jdk_package = 'openjdk-17-jre-headless'
 
+apt_update 'update' do
+  action :update
+end
+
 # Get DB config parameters from databag
-dbconfigdata = data_bag_item('configbag','dbconfig_items')
+dbconfigdata = data_bag_item(node['petclinic']['config_data_bag'],'dbconfig_items')
 
 # Use the package resource to install OpenJDK 17
 package jdk_package do
