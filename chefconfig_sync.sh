@@ -10,12 +10,20 @@ if [ ! -e "$runlist_check" ] ; then
     git pull origin main
     # upload the cookbook
     knife cookbook upload --cookbook-path /home/ubuntu/Dr-Chef-Git-Repo/cookbooks/ --all
-    # create data bag
+    # create pr data bag
     knife data bag create configbag
-    # import data bags
+    # import pr data bags
     knife data bag from file configbag --all
+    # create dr data bag
+    knife data bag create drconfigbag
+    # import dr data bags
+    knife data bag from file drconfigbag --all
     # import role
     knife role from file roles/*.json
+    # Attach dr node to role
+    knife node run_list add DBNode role['dr_role']
+    knife node run_list add WebNode role['dr_role']
+    knife node run_list add AppNode role['dr_role']
     # add runlist for dbnode,webnode and appnode
     knife node run_list add DBNode 'recipe[db-cookbook::default]'
     knife node run_list add AppNode 'recipe[PetClinic-App::default]'
@@ -30,11 +38,19 @@ else
     git pull origin main
     # upload the cookbook
     knife cookbook upload --cookbook-path /home/ubuntu/Dr-Chef-Git-Repo/cookbooks/ --all
-    # create data bag
+    # create pr data bag
     knife data bag create configbag
-    # import data bags
+    # import pr data bags
     knife data bag from file configbag --all
+    # create dr data bag
+    knife data bag create drconfigbag
+    # import dr data bags
+    knife data bag from file drconfigbag --all
     # import role
     knife role from file roles/*.json
+    # Attach dr node to role
+    knife node run_list add DBNode role['dr_role']
+    knife node run_list add WebNode role['dr_role']
+    knife node run_list add AppNode role['dr_role']
     exit 0
 fi
