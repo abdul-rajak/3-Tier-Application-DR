@@ -8,12 +8,12 @@ This repository includes documentation and scripts for establishing and overseei
 Before implementing disaster recovery for your 3-Tier application, make sure you have the following prerequisites:
 - Chef Setup and configured on AWS Account in Primary and disaster recovery regions.
 - AWS Account with requied permissions.
-- AWS 3-Tier Application deployed and running.
-- Familiarity with AWS services such as EC2, RDS, VPC, AWS Backup & Restore, Lambda, AWS SNS, AWS Eventbridge etc.
+- AWS 3-Tier Application deployed and running on PR site.
+- Familiarity with AWS services such as EC2, VPC, AWS Backup & Restore, Lambda, AWS SNS, AWS Eventbridge, Step Function, IAM, Route53.
 - DR chef server is preconfigured with separate organization for disaster workflow.
 ## Architecture
 
-![alt text](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/AWS-DR-Architecture.jpg?raw=true)
+![alt text](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/DR-Architecture.jpg?raw=true)
 
 
 ## Version Control
@@ -28,20 +28,22 @@ Before implementing disaster recovery for your 3-Tier application, make sure you
 
 ## StepFunction flow
 
-![alt text](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/ Stepfunction-workflow.jpg?raw=true)
+![alt text](https://github.com/abdul-rajak/Dr-Chef-Git-Repo/blob/main/Architecture/Stepfunction-workflow.jpg?raw=true)
 
 ## Disaster Recovery Workflow
 
-Backup Strategy :
+**Backup Strategy** :
 + AWS backups are scheduled for essential nodes and stored securely in the DR backup vault.
-Disaster Simulation & Auto trigger:
+
+**Disaster Simulation & Auto trigger**:
 + Simulate a disaster by disabling the Web node.
 + AWS EventBridge detects the state change (stopped) and triggers an SNS notification, initiating the Step Function.
-Step Function :
+
+**Step Function** :
 
 The Step Function orchestrates recovery by systematically invoking Lambda functions.
 Key steps include :
-+ Node restoration.
++ Nodes restoration.
 + Git repository cloning on the DR workstation.
 + Update data bag as per DR configuration
     + default_attributes at role level are used to define site configuration. "pr-role" used primary site configuration and "dr-role" uses disaster site configuration.
@@ -52,12 +54,13 @@ Key steps include :
 + Add recipes to the nodes.
 + Add Route 53 record for dr site.
 
-Chef Client: 
+**Chef Client**: 
 + Automatically reapplies changes from the updated Chef server on the nodes.
 
 ## Testing
-+ Access the 3-tier application at the DR (Disaster Recovery) site and verify whether our application is operational following the restoration process.
-+ Verify whether a new entry has been added to our PostgreSQL database.
++ Access the 3-tier application at the DR (Disaster Recovery) site and verify whether our application is operational.
++ Verify whether a new entry can be added to our PostgreSQL database.
++ Verify Elastic IPs are assinged to Nodes.
 ## Contributing
 Contributions are welcome! Report issues, suggest features, or submit code changes via pull requests. Please follow our code style, add tests, and update documentation. Respect our Code of Conduct, and contributions are licensed under our project's terms.
         Thank you for your interest!
