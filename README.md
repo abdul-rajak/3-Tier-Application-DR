@@ -40,7 +40,6 @@ Before implementing disaster recovery for your 3-Tier application, make sure you
 + AWS EventBridge detects the state change (stopped) and triggers an SNS notification, initiating the Step Function.
 
 **Step Function** :
-
 The Step Function orchestrates recovery by systematically invoking Lambda functions.
 Key steps include :
 + Nodes restoration.
